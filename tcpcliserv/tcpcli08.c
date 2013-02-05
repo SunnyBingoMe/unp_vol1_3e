@@ -1,5 +1,9 @@
 #include	"unp.h"
 
+void fSigPipe(int ttt){
+	printf("sig pipe got.");
+}
+
 int
 main(int argc, char **argv)
 {
@@ -8,6 +12,8 @@ main(int argc, char **argv)
 
 	if (argc != 2)
 		err_quit("usage: tcpcli <IPaddress>");
+
+	Signal(SIGPIPE, fSigPipe);
 
 	sockfd = Socket(AF_INET, SOCK_STREAM, 0);
 
@@ -18,7 +24,11 @@ main(int argc, char **argv)
 
 	Connect(sockfd, (SA *) &servaddr, sizeof(servaddr));
 
-	str_cli(stdin, sockfd);		/* do it all */
+	//str_cli(stdin, sockfd);		/* do it all */
+	sleep(2);
+	Write(sockfd, "hello", 5);
+	sleep(2);
+	Write(sockfd, "hello", 5);
 
 	exit(0);
 }

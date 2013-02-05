@@ -24,6 +24,7 @@ main(int argc, char **argv)
 
 	while ( (n = read(sockfd, recvline, MAXLINE)) > 0) {
 		recvline[n] = 0;	/* null terminate */
+		printf("%d\n", n);
 		if (fputs(recvline, stdout) == EOF)
 			err_sys("fputs error");
 	}

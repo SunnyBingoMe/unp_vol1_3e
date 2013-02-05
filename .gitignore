@@ -2,4 +2,25 @@
 *.swp
 *.out
 *.o
+tags*
+
+tcpcliserv/*
+!tcpcliserv/*.c
+!tcpcliserv/Makefile
+
+sock/*
+!sock/*.c
+!sock/Makefile
+
+sockopt/*
+!sockopt/*.c
+!sockopt/Makefile
+
+intro/*
+!intro/*.c
+!intro/Makefile
+
+advio/*
+!advio/*.c
+!advio/Makefile
 

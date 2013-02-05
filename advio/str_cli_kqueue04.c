@@ -15,6 +15,7 @@ str_cli(FILE *fp, int sockfd)
 	EV_SET(&kev[0], fileno(fp), EVFILT_READ, EV_ADD, 0, 0, NULL);
 	EV_SET(&kev[1], sockfd, EVFILT_READ, EV_ADD, 0, 0, NULL);
 
+		printf("in for");
 	kq = Kqueue();
 	ts.tv_sec = ts.tv_nsec = 0;
 	Kevent(kq, kev, 2, NULL, 0, &ts);
@@ -36,8 +37,10 @@ str_cli(FILE *fp, int sockfd)
 
 			if (kev[i].ident == fileno(fp)) {  /* input is readable */
 				n = Read(fileno(fp), buf, MAXLINE);
-				if (n > 0)
+				if (n > 0){
 					Writen(sockfd, buf, n);
+					sleep(2);
+				}
 
 				if (n == 0 || (isfile && n == kev[i].data)) {
 					stdineof = 1;

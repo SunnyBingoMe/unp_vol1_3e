@@ -15,6 +15,9 @@ main(int argc, char **argv)
 	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	servaddr.sin_port        = htons(SERV_PORT);
 
+	int optValue = 1;
+	Setsockopt(listenfd, IPPROTO_TCP, 1, &optValue, 4);
+
 	Bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
 
 	Listen(listenfd, LISTENQ);
